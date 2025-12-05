@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>LinkedUp Auth Redirect</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      background: #0e0e10;
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+      padding: 20px;
+    }
+    .box {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 20px 30px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="box">
+    <h2>LinkedUp — Authentication Complete</h2>
+    <p>You may now close this window.</p>
+  </div>
+
+  <script>
+    // Get the access token from URL fragment
+    const hash = window.location.hash.substring(1);
+    const params = new URLSearchParams(hash);
+    const token = params.get("access_token");
+
+    if (token) {
+      // Store token for website pages (never inside extension)
+      localStorage.setItem("twitch_token", token);
+    }
+
+    // Close window after a short delay
+    setTimeout(() => window.close(), 1500);
+  </script>
+
+</body>
+</html>
